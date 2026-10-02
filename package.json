@@ -1,0 +1,16 @@
+{
+  "name": "cypress-saucedemo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Case de estudo: Cypress + GitHub Actions automatizando o site Swag Labs (saucedemo.com)",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:login": "cypress run --spec cypress/e2e/login.cy.js",
+    "cy:produtos": "cypress run --spec cypress/e2e/produtos.cy.js",
+    "cy:checkout": "cypress run --spec cypress/e2e/carrinho-checkout.cy.js"
+  },
+  "devDependencies": {
+    "cypress": "^13.15.0"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules/
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+results/
+cypress.env.json
+.env
+cypress_ct.zip

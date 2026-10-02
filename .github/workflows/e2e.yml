@@ -1,0 +1,59 @@
+# =====================================================================
+#  Case de estudo: Cypress + GitHub Actions
+#  Site testado: Swag Labs (https://www.saucedemo.com), uma loja de
+#  demonstração feita para praticar automação de testes.
+#
+#  Como o site já está publicado, não há aplicação para subir no runner:
+#  o pipeline só baixa os testes e roda o Cypress contra a URL pública.
+# =====================================================================
+
+name: E2E - Swag Labs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:              # botão "Run workflow" na aba Actions
+  schedule:
+    - cron: '0 11 * * 1-5'        # dias úteis às 8h de Brasília (11h UTC)
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cypress:
+    name: Cypress E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Rodar os testes
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+        env:
+          # Credenciais vêm dos Secrets do repositório.
+          # O valor após || é um padrão usado só porque estas credenciais
+          # de demonstração são públicas; em projetos reais, não use padrão.
+          CYPRESS_USUARIO: ${{ secrets.CYPRESS_USUARIO || 'standard_user' }}
+          CYPRESS_SENHA: ${{ secrets.CYPRESS_SENHA || 'secret_sauce' }}
+
+      - name: Guardar screenshots das falhas
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-${{ github.run_number }}
+          path: cypress/screenshots
+          retention-days: 7
+          if-no-files-found: ignore

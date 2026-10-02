@@ -1,0 +1,10 @@
+{
+  "comprador": {
+    "nome": "Maria",
+    "sobrenome": "Teste",
+    "cep": "01310-100"
+  },
+  "usuarios": {
+    "bloqueado": "locked_out_user"
+  }
+}
