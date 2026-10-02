@@ -22,3 +22,11 @@ Cypress.Commands.add('login', (
     },
   );
 });
+// Abre a vitrine de produtos.
+// O servidor do Swag Labs responde 404 ao acessar /inventory.html direto,
+// mas a aplicação carrega a página normalmente. Por isso ignoramos o status
+// e confirmamos que a página abriu verificando o título.
+Cypress.Commands.add('abrirVitrine', () => {
+  cy.visit('/inventory.html', { failOnStatusCode: false });
+  cy.get('.title').should('have.text', 'Products');
+});

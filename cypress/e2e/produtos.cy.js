@@ -1,7 +1,7 @@
 describe('Vitrine de produtos', () => {
-  beforeEach(() => {
+    beforeEach(() => {
     cy.login();
-    cy.visit('/inventory.html');
+    cy.abrirVitrine();
   });
 
   it('exibe os 6 produtos', () => {

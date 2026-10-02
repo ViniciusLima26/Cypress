@@ -1,7 +1,7 @@
 describe('Carrinho e checkout', () => {
-  beforeEach(() => {
+    beforeEach(() => {
     cy.login();
-    cy.visit('/inventory.html');
+    cy.abrirVitrine();
   });
 
   it('adiciona e remove um produto do carrinho', () => {
