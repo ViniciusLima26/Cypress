@@ -59,7 +59,7 @@ npm run cy:run      # headless, igual ao CI
    Tente fazer merge do PR do passo 5: o GitHub bloqueia.
 7. Corrija o teste no mesmo PR, veja o check ficar verde e faça o merge.
 
-## Quando o pipeline roda
+## Quando o pipeline roda git actions
 
 | Evento | Exemplo |
 |---|---|
